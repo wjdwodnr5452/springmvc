@@ -61,3 +61,71 @@ logging.level.hello.springmvc=debug
  - 시스템 아웃 콘솔에만 출력하는 것이 아니라, 파일이나 네트워크 등, 로그를 별도의 위치에 남길 수 있다. 특히 파일로 남길 때는 일별, 특정 용량에 따라 로그를 분할 하는것도 가능하다.
  - 성능도 일단 System.out 보다 좋다.
 
+
+# 요청 매핑
+
+##### @RestController
+- @Controller 는 반환값이 String 이면 뷰 이름으로 인식됨 그래서 뷰를 찾고 뷰가 랜더링 된다.
+- @RestController는 반환 값으로 뷰를 찾는 것이 아니라 HTTP 메시지 바디에 바로 입력한다. 따라서 실행 결화로 ok 메시지를 받을 수 있다.
+
+##### @RequestMapping("/hello-basic")
+- /hello-basic URL 호출이 오면 이 메서드가 실행되도록 매핑한다.
+- 대부분의 속성을 배열로 제공하므로 다중 설정이 가능하다.
+
+/hello-basic, /hello-basic/ 다른 url 이지만 스프링은 같은 요청으로 매핑한다.
+
+##### HTTP 메서드
+- @RequestMapping에 method 속성으로 HTTP 메서드를 지정하지 않으면 HTTP 메서드와 무관하게 호출한다
+  예) get, post, put, delete 모두 허용
+
+##### 메서드 지정
+```
+ @RequestMapping(value = "/hello-basic", method = RequestMethod.GET)
+```
+
+##### HTTP 메서드 지정 축약
+```
+   /**
+     * 편리한 축약 애노테이션 (코드보기)
+     * @GetMapping
+     * @PostMapping
+     * @PutMapping
+     * @DeleteMapping
+     * @PatchMapping
+     */
+    @GetMapping(value = "/mapping-get-v2")
+    public String mappingGetV2() {
+        log.info("mapping-get-v2");
+        return "ok";
+    }
+```
+
+
+##### PathVariable(경로 변수) 사용
+```
+  /**
+     * PathVariable 사용
+     * 변수명이 같으면 생략 가능
+     * @PathVariable("userId") String userId -> @PathVariable String userId
+     */
+    @GetMapping("/mapping/{userId}")
+    public String mappingPath(@PathVariable("userId") String data){
+        log.info("mappingPath userId={}", data);
+        return "ok";
+    }
+```
+- 최근 HTTP API는 다음과 같이 리소스 경로에 식별자를 넣는 스타일을 선호
+- @PathVariable 의 이름과 파라미터 이름이 같으면 생략 가능
+```
+  @GetMapping("/mapping/{userId}")
+    public String mappingPath(@PathVariable String userId){
+        log.info("mappingPath userId={}", userId);
+        return "ok";
+    }
+```
+
+
+
+
+
+
