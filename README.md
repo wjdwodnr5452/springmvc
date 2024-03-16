@@ -133,8 +133,12 @@ logging.level.hello.springmvc=debug
 - 회원 수정 : PATCH '/users/{userId}'
 - 회원 삭제 : DELETE '/users/{userId}'
 
+# HTTP 요청 - 기본, 헤더 조회
 
-
+#### MultyValueMap
+- MAP과 유사한데, 하나의 키에 여러 값을 받을 수 있다.
+- HTTP header, HTTP 쿼리 파라미터와 같이 하나의 키에 여러 값을 받을 때 사용
+  - keyA=value1&keyA=value2
 
 
 
