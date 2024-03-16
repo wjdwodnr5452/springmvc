@@ -124,6 +124,16 @@ logging.level.hello.springmvc=debug
     }
 ```
 
+# 요청 매핑 - API 예시
+
+#### 회원 관리 API
+- 회원 목록 조회 : GET '/users'
+- 회원 등록 : POST '/users/{userId}'
+- 회원 조회 : GET '/users/{userId}'
+- 회원 수정 : PATCH '/users/{userId}'
+- 회원 삭제 : DELETE '/users/{userId}'
+
+
 
 
 
