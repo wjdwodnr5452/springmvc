@@ -140,6 +140,21 @@ logging.level.hello.springmvc=debug
 - HTTP header, HTTP 쿼리 파라미터와 같이 하나의 키에 여러 값을 받을 때 사용
   - keyA=value1&keyA=value2
 
+# HTTP 요청 파라미터 - @RequestParam
+- @RequestParam : 파라미터 이름으로 바인딩
+- @ResponseBody : View 조회를 무시하고, HTTP message body에 직접 해당 내용 입력
+
+HTTP 파라미터 이름이 변수 이름과 같으면 @RequestParam(name="username") 생략 가능
+- 생략 :  @RequestParam String username
+
+####  requestParamDefault
+- 파라미터에 값이 없는 경우 defaultValue를 사용하면 기본 값을 적용
+```
+ @RequestParam(required = true, defaultValue = "guest")
+``
+
+
+  
 
 
 
