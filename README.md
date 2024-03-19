@@ -152,10 +152,7 @@ HTTP 파라미터 이름이 변수 이름과 같으면 @RequestParam(name="usern
   
 ```
  @RequestParam(required = true, defaultValue = "guest")
-``
-
-
-  
+```
 
 
 
