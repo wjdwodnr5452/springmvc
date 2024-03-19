@@ -149,6 +149,7 @@ HTTP 파라미터 이름이 변수 이름과 같으면 @RequestParam(name="usern
 
 ####  requestParamDefault
 - 파라미터에 값이 없는 경우 defaultValue를 사용하면 기본 값을 적용
+  
 ```
  @RequestParam(required = true, defaultValue = "guest")
 ``
