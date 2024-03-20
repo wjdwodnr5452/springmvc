@@ -154,5 +154,18 @@ HTTP 파라미터 이름이 변수 이름과 같으면 @RequestParam(name="usern
  @RequestParam(required = true, defaultValue = "guest")
 ```
 
+# HTTP 요청 파라미터 - @ModelAttribute
+
+##### 롬복
+- @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor 를 자동으로 적용
+
+##### @ModelAttribute - 작동 순서
+- HelloData 객체 생성
+- 요청 파라미터의 이름으로 HelloData 객체의 프로퍼티를 찾음 그리고 해당 프로퍼티의 setter를 호출해서 파라미터의 값을 입력 함
+- 예) 파라미터 이름이 username 이면 setUsername() 메서드를 찾아서 호출하면서 값을 입력
+
+##### 프로퍼티
+- 객체에 getUsername(), setUsername() 메서드가 있으면, 이 객체는 username이라는 프로퍼티를 가지고 있다.
+
 
 
