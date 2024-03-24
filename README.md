@@ -199,6 +199,28 @@ HTTP 파라미터 이름이 변수 이름과 같으면 @RequestParam(name="usern
 
 ##### @ResponseBody
 - @ResponseBody를 사용하면 응답 결과를 HTTP 메시지 바디에 직접 담아서 전달할 수 있다. 물론 이 경우에도 view를 사용하지 않는다.
+
+# HTTP 요청 메시지 - JSON
+
+##### @RequestBody 객체 파라미터
+- @RequestBody HelloData data
+- @RequestBody에 직접 만든 객체를 지정할 수 있다.
+
+HttpEntity, @ReqyestBody를 사용하면 HTTP 메시지 컨버터가 HTTP 메시지 바디의 내용을 우리가 원하는 문자나 객체등으로 변환해준다. HTTP 메시지 컨버터는 문자 뿐만 아니라 JSON도 객체로 변환 해주는데, 헤더에 content type인 json이면 처리 해준다.
+
+##### @RequestBody는 생략 불가능
+- 스프링은 @ModelAttribute, @RequestParam 해당 생략시 다음과 규칙
+  - String, int, Integer 같은 단순 타입 = @RequestParam
+  - 나머지 = @ModelAttribute
+ 
+##### @ResponseBody
+- 응답 경우에도 @ResponseBody를 사용하면 해당 객체를 HTTP 메시지 바디에 직접 넣어줄 수 있다.
+
+##### @RequestBody 요청
+- JSON 요청 -> HTTP 메시지 컨버터 -> 객체
+
+##### @ResponseBody 응답
+- 객체 -> HTTP 메시지 컨버터 -> JSON  응답
     
 
  
