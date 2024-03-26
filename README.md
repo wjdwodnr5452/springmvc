@@ -252,8 +252,13 @@ HttpEntity, @ReqyestBody를 사용하면 HTTP 메시지 컨버터가 HTTP 메시
   - 응답 예) @ResponseBody return helloData 쓰기 미디어타입 application/json 관련
  
     
+# 요청 매핑 핸들러 어뎁터 구조
+- HTTP 메시지 컨버터는 어디 시점에서 동작을 할까? 그 부분은 @RequestMapping을 처리하는 핸들러 어댑터인 RequestMappingHandlerAdapter에 있다.
 
-
+##### RequestMappingHandlerAdapter 동작 방식
+- ArqumentResolver
+  - HttpServletRequest, Model은 물론이고, @RequestParam, @ModelAttribute 같은 애노테이션 그리고 @RequestBody, HttpEntity 같은 HTTP 메시지를 처리하는 부분까지 매우 큰 유연함을 보여줌
+  - 애노테이션 기반 컨트롤러를 처리하는 RequestMappingHandlerAdapter는 바로 ArqumentResolver를 호출해서 컨트롤러(핸들러)가 필요로 하는 다양한 파라미터의 값을 생성한다. 그리고 이렇게 파라미터의 값이 모두 준비되면 컨트롤러를 호출하면서 값을 넘겨준다.
 
     
 
