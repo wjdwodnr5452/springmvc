@@ -256,11 +256,18 @@ HttpEntity, @ReqyestBody를 사용하면 HTTP 메시지 컨버터가 HTTP 메시
 - HTTP 메시지 컨버터는 어디 시점에서 동작을 할까? 그 부분은 @RequestMapping을 처리하는 핸들러 어댑터인 RequestMappingHandlerAdapter에 있다.
 
 ##### RequestMappingHandlerAdapter 동작 방식
-- ArqumentResolver
+- ArgumentResolver
   - HttpServletRequest, Model은 물론이고, @RequestParam, @ModelAttribute 같은 애노테이션 그리고 @RequestBody, HttpEntity 같은 HTTP 메시지를 처리하는 부분까지 매우 큰 유연함을 보여줌
-  - 애노테이션 기반 컨트롤러를 처리하는 RequestMappingHandlerAdapter는 바로 ArqumentResolver를 호출해서 컨트롤러(핸들러)가 필요로 하는 다양한 파라미터의 값을 생성한다. 그리고 이렇게 파라미터의 값이 모두 준비되면 컨트롤러를 호출하면서 값을 넘겨준다.
-
+  - 애노테이션 기반 컨트롤러를 처리하는 RequestMappingHandlerAdapter는 바로 ArgumentResolver를 호출해서 컨트롤러(핸들러)가 필요로 하는 다양한 파라미터의 값을 생성한다. 그리고 이렇게 파라미터의 값이 모두 준비되면 컨트롤러를 호출하면서 값을 넘겨준다.
+  - ArgumentResolver의 supprtsParameter()를 호출해서 해당 파라미터를 지원하는지 체크하고 지원하면 resolveArgument()를 호출해서 실제 객체를 생성한다. 그리고 이렇게 생성된 객체가 컨트롤러 호출시 넘어가는 것이다.
     
 
- 
+##### HTTP 메시지 컨버터
+- HTTP 메시지 컨버터를 사용하는 @RequestBody도 컨트롤러가 필요로 하는 파라미터 값에 사용된다.
+
+1. 요청의 경우
+- @RequestBody를 처리하는 ArgumentResolver가 있고, HttpEntity를 처리하는 ArgumentResolver가 있다. 이 ArgumentResolver 들이 HTTP 메시지 컨버터를 사용해서 필요한 객체를 생성하는 것
+
+2. 응답의 경우
+- @ResponseBody와 HttpEntity를 처리하는 ReturnValueHandler가 있다.
 
